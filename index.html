@@ -1,1004 +1,328 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revisão de Prova de Genética — Professora Michelle Diana</title>
+===============================================================================
+PROCESSOS PSICOLÓGICOS CONTEMPORÂNEOS
+SIMULADO AV1 — CÓDIGO-FONTE
+===============================================================================
+
+Projeto: Simulado de Processos Psicológicos Contemporâneos
+Disciplina: Processos Psicológicos Contemporâneos
+Professora: Danúbia
+Autor/Projeto: Thiago Aragão
+Formato: HTML5 + CSS3 + JavaScript puro
+Interface: Mobile-first / responsiva
+Avaliação: 20 questões · 0,5 ponto por questão · 10,0 pontos
+Tempo: 30 minutos
+Estrutura: Fase 1 — Capa/Formulário | Fase 2 — Simulado | Resultado
+
+INSTRUÇÕES
+----------
+Este arquivo contém o código-fonte completo do projeto HTML.
+Para executar o simulado, salve o conteúdo em um arquivo com extensão
+".html", preferencialmente como:
+
+    index.html
+
+O arquivo é autocontido e não depende de bibliotecas externas.
+
+===============================================================================
+
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Processos Psicológicos Contemporâneos • Simulado</title>
 
 <style>
 :root{
-  --bg:#ffffff;
-  --surface:#f8fafc;
-  --surface2:#f1f5f9;
-  --text:#172033;
-  --muted:#64748b;
-  --primary:#2563eb;
-  --primary-dark:#1d4ed8;
-  --purple:#7c3aed;
-  --green:#059669;
-  --red:#dc2626;
-  --yellow:#d97706;
-  --border:#dbe3ee;
-  --shadow:0 14px 40px rgba(15,23,42,.09);
+ --bg:#f5f7fb;--card:#fff;--soft:#eef3fa;--ink:#17243a;--mut:#64738a;--line:#dce5f1;
+ --acc:#236fd0;--acc2:#7656df;--ok:#15966a;--no:#d84a5a;
 }
-
+body[data-mode="dark"]{
+ --bg:#07111f;--card:#101d30;--soft:#13253d;--ink:#edf4ff;--mut:#9eafc6;--line:#253954;
+ --acc:#69adff;--acc2:#9679ff;--ok:#54ddb0;--no:#ff7886;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+#intro{min-height:100svh;display:grid;place-items:center;padding:22px;overflow:hidden;background:
+ radial-gradient(circle at 8% 10%,color-mix(in srgb,var(--acc) 12%,transparent),transparent 30%),
+ radial-gradient(circle at 92% 88%,color-mix(in srgb,var(--acc2) 10%,transparent),transparent 32%),var(--bg)}
+.intro-shell{width:min(100%,900px)}
+.intro-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.brand-mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--ink);color:var(--bg);font-size:20px;font-weight:800}
+.theme{display:flex;gap:3px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--card)}
+.theme button{border:0;background:transparent;color:var(--mut);padding:7px 11px;border-radius:999px;font-size:12px;font-weight:750}
+.theme button.active{background:var(--ink);color:var(--bg)}
+.cover{background:var(--card);border:2px solid var(--line);border-radius:30px;padding:clamp(25px,5vw,52px);box-shadow:0 25px 70px rgba(22,45,80,.10)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);display:flex;gap:8px;align-items:center}
+.eyebrow span{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.cover h1{font-size:clamp(2.4rem,8vw,5.5rem);line-height:.92;letter-spacing:-.065em;margin:22px 0 18px;font-weight:900}
+.cover h1 em{font-style:normal;color:var(--acc)}
+.lead{max-width:650px;font-size:clamp(1rem,2.3vw,1.2rem);line-height:1.55;color:var(--mut);margin:0}
+.cover-line{height:1px;background:var(--line);margin:28px 0}
+.academic{display:grid;grid-template-columns:2fr 1fr 1.3fr 1fr;gap:18px;margin-bottom:28px}
+.academic small{display:block;color:var(--mut);font-size:10px;font-weight:800;letter-spacing:.1em;margin-bottom:5px}
+.academic strong{font-size:13px;line-height:1.3}
+#fm label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);margin-bottom:7px}
+.name-field{border:2px solid color-mix(in srgb,var(--acc) 42%,var(--line));border-radius:15px;background:var(--bg);transition:.2s}
+.name-field:focus-within{border-color:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 11%,transparent)}
+.name-field input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);padding:14px 15px;font-size:16px}
+.er{min-height:22px;color:var(--no);font-size:12px;padding-top:5px}
+.primary,.secondary{border:0;border-radius:14px;padding:14px 18px;font-weight:850}
+.primary{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 12px 25px color-mix(in srgb,var(--acc) 22%,transparent)}
+.start{width:100%;font-size:15px}.start span{float:right;font-size:20px}
+.session-info{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px;color:var(--mut);font-size:12px;font-weight:700}
+.live-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(20,155,106,.1);color:var(--ok);font-size:10px;font-weight:900;letter-spacing:.08em}
+.live-badge i{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:live 1.4s ease-in-out infinite}
+@keyframes live{50%{opacity:.35;transform:scale(.72)}}
+#intro.leave{animation:coverOut .6s cubic-bezier(.65,0,.2,1) forwards}
+@keyframes coverOut{to{opacity:0;transform:translateY(-18px) scale(.985)}}
 
-body{
-  margin:0;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(37,99,235,.07),transparent 28%),
-    radial-gradient(circle at 90% 0%,rgba(124,58,237,.06),transparent 28%),
-    var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  line-height:1.6;
-}
-
-.app{
-  width:min(100% - 28px,900px);
-  margin:auto;
-  padding:22px 0 60px;
-}
-
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.brand{
-  font-weight:900;
-  letter-spacing:.08em;
-  font-size:.78rem;
-  color:var(--primary);
-}
-
-.progress-text{
-  color:var(--muted);
-  font-size:.86rem;
-  font-weight:700;
-}
-
-.screen{display:none}
-.screen.active{display:block}
-
-.hero{
-  min-height:calc(100vh - 80px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.login-card{
-  width:min(100%,680px);
-  background:rgba(255,255,255,.96);
-  border:1px solid var(--border);
-  border-radius:28px;
-  box-shadow:var(--shadow);
-  padding:34px;
-  text-align:center;
-}
-
-.eyebrow{
-  display:inline-flex;
-  padding:7px 13px;
-  border-radius:999px;
-  background:#eff6ff;
-  color:var(--primary);
-  font-size:.75rem;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-h1{
-  font-size:clamp(2rem,7vw,4rem);
-  line-height:1.03;
-  margin:18px 0 12px;
-  letter-spacing:-.045em;
-}
-
-h2{
-  font-size:clamp(1.35rem,4vw,2rem);
-  line-height:1.2;
-  margin:0 0 14px;
-}
-
-.subtitle{
-  color:var(--muted);
-  max-width:620px;
-  margin:0 auto 26px;
-}
-
-.input{
-  width:100%;
-  border:1px solid #cbd5e1;
-  border-radius:14px;
-  padding:15px 16px;
-  font-size:1rem;
-  outline:none;
-  color:var(--text);
-  background:white;
-  transition:.2s;
-}
-
-.input:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 4px rgba(37,99,235,.10);
-}
-
-.btn{
-  border:0;
-  border-radius:14px;
-  padding:13px 18px;
-  font-size:.98rem;
-  font-weight:800;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.btn-primary{
-  background:var(--primary);
-  color:white;
-}
-
-.btn-primary:hover{background:var(--primary-dark)}
-.btn-secondary{
-  background:var(--surface2);
-  color:var(--text);
-  border:1px solid var(--border);
-}
-
-.btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:10px;
-  margin:25px 0;
-}
-
-.info{
-  text-align:left;
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:14px;
-  border-radius:14px;
-}
-
-.info strong{
-  display:block;
-  margin-bottom:2px;
-}
-
-.info span{
-  color:var(--muted);
-  font-size:.85rem;
-}
-
-.question-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:24px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-
-.question-head{
-  padding:23px 23px 15px;
-  border-bottom:1px solid var(--border);
-}
-
-.question-type{
-  display:inline-flex;
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:.72rem;
-  font-weight:900;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  background:#eff6ff;
-  color:var(--primary);
-  margin-bottom:12px;
-}
-
-.question-number{
-  color:var(--muted);
-  font-size:.82rem;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.question-text{
-  font-size:clamp(1.05rem,3vw,1.28rem);
-  line-height:1.5;
-  font-weight:800;
-  margin:0;
-}
-
-.options{
-  padding:18px 23px;
-  display:grid;
-  gap:10px;
-}
-
-.option{
-  position:relative;
-}
-
-.option input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-
-.option label{
-  display:block;
-  padding:14px 15px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  cursor:pointer;
-  background:#fff;
-  transition:.18s;
-}
-
-.option label:hover{
-  border-color:#93c5fd;
-  background:#f8fbff;
-}
-
-.option input:checked + label{
-  border-color:var(--primary);
-  background:#eff6ff;
-  box-shadow:0 0 0 2px rgba(37,99,235,.08);
-}
-
-.option-letter{
-  display:inline-flex;
-  width:28px;
-  height:28px;
-  align-items:center;
-  justify-content:center;
-  border-radius:8px;
-  background:var(--surface2);
-  margin-right:9px;
-  font-weight:900;
-  font-size:.85rem;
-}
-
-.option input:checked + label .option-letter{
-  background:var(--primary);
-  color:white;
-}
-
-.navigation{
-  padding:17px 23px 23px;
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  border-top:1px solid var(--border);
-}
-
-.hint{
-  color:var(--muted);
-  font-size:.82rem;
-  margin-top:10px;
-  text-align:center;
-}
-
-.final-warning{
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  color:#9a3412;
-  padding:14px;
-  border-radius:14px;
-  margin-bottom:15px;
-  font-size:.9rem;
-}
-
-.result-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:28px;
-  box-shadow:var(--shadow);
-  padding:28px;
-}
-
-.result-score{
-  text-align:center;
-  padding:25px 10px;
-}
-
-.score-number{
-  font-size:clamp(3.5rem,15vw,6rem);
-  line-height:1;
-  font-weight:950;
-  color:var(--primary);
-}
-
-.score-label{
-  color:var(--muted);
-  font-weight:800;
-}
-
-.result-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin:22px 0;
-}
-
-.result-box{
-  padding:16px 10px;
-  border-radius:15px;
-  text-align:center;
-  background:var(--surface);
-  border:1px solid var(--border);
-}
-
-.result-box strong{
-  display:block;
-  font-size:1.5rem;
-}
-
-.correct{color:var(--green)}
-.wrong{color:var(--red)}
-.unanswered{color:var(--yellow)}
-
-.result-list{
-  display:grid;
-  gap:9px;
-  margin-top:20px;
-}
-
-.result-item{
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:12px 14px;
-  background:var(--surface);
-}
-
-.result-item.ok{border-left:4px solid var(--green)}
-.result-item.bad{border-left:4px solid var(--red)}
-
-.small{
-  color:var(--muted);
-  font-size:.83rem;
-}
-
-.footer{
-  text-align:center;
-  margin-top:25px;
-  color:var(--muted);
-  font-size:.78rem;
-}
-
-@media(max-width:600px){
-  .app{width:min(100% - 18px,900px)}
-  .login-card{padding:24px 18px;border-radius:22px}
-  .question-head,.options{padding-left:16px;padding-right:16px}
-  .navigation{padding:14px 16px 17px}
-  .btn{padding:12px 14px}
-}
+#app{min-height:100svh}
+.quiz-header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 91%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.quiz-header-inner,.quiz-progress,.quiz-intro,#prova,.result-list,#resultView>button,footer{width:min(100% - 28px,920px);margin-left:auto;margin-right:auto}
+.quiz-header-inner{display:flex;justify-content:space-between;gap:15px;align-items:center;padding:13px 0}
+.small-title{font-size:10px;font-weight:850;letter-spacing:.1em;color:var(--acc)}
+.quiz-header h2{margin:2px 0 0;font-size:20px;letter-spacing:-.03em}
+.header-actions{display:flex;align-items:center;gap:8px}
+.timer-box{display:flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);border-radius:11px;background:var(--card)}
+.timer-box span{font-size:9px;color:var(--mut);text-transform:uppercase;font-weight:800}.timer-box strong{font-size:15px;font-variant-numeric:tabular-nums}
+.timer-box.urgent{border-color:var(--no);color:var(--no)}
+.quiz-progress{padding-bottom:11px}.progress-row{display:flex;justify-content:space-between;font-size:10px;color:var(--mut);font-weight:800;margin-bottom:5px}
+.progress-track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}.progress-track i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .25s}
+.quiz-intro{padding:34px 0 18px;display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:end}
+.quiz-intro span{font-size:10px;font-weight:900;color:var(--acc);letter-spacing:.12em}.quiz-intro h1{font-size:clamp(1.7rem,4vw,2.5rem);margin:5px 0 0;letter-spacing:-.045em}.quiz-intro p{color:var(--mut);line-height:1.5;margin:0}.student-chip{grid-column:1/-1;color:var(--mut);font-size:11px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:var(--card)}.student-chip b{color:var(--ink)}
+#prova{padding-bottom:35px}
+.question-card{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:16px 0;padding:20px;box-shadow:0 12px 32px rgba(24,45,75,.06);scroll-margin-top:130px}
+.q-head{display:flex;gap:12px;align-items:center}.q-index{font-size:22px;font-weight:900;color:var(--acc);letter-spacing:-.05em}.q-meta{font-size:10px;font-weight:850;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}.q-topic{font-size:11px;font-weight:750;color:var(--acc);margin-top:2px}
+.context{margin-top:16px;padding:13px 14px;border-radius:13px;background:var(--soft);border-left:4px solid var(--acc);font-size:13px;line-height:1.55;color:var(--mut)}.context span,.label,.study-note span{display:block;font-size:9px;letter-spacing:.11em;font-weight:900;color:var(--acc);margin-bottom:6px}
+.statement{margin-top:13px;padding:16px;border-radius:15px;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 7%,var(--card)),color-mix(in srgb,var(--acc2) 4%,var(--card)));border:1px solid color-mix(in srgb,var(--acc) 17%,var(--line));box-shadow:inset 3px 0 var(--acc)}
+.statement-text{font-size:15px;line-height:1.62;font-weight:700}.study-note{margin-top:10px;padding:10px 12px;border:1px dashed color-mix(in srgb,var(--acc) 30%,var(--line));border-radius:12px;color:var(--mut);font-size:11px;line-height:1.5}.answers{margin-top:13px;padding:12px;border-radius:15px;background:color-mix(in srgb,var(--soft) 58%,transparent);border:1px solid var(--line)}.answer-label{color:var(--mut)}
+.answer{width:100%;display:flex;gap:11px;text-align:left;align-items:flex-start;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:12px;margin:7px 0;line-height:1.45;font-size:13px;transition:.15s}.answer:hover{border-color:var(--acc);transform:translateY(-1px)}.answer.selected{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,var(--card));box-shadow:0 0 0 2px color-mix(in srgb,var(--acc) 9%,transparent)}.letter{min-width:27px;height:27px;border-radius:8px;display:grid;place-items:center;background:var(--soft);color:var(--acc);font-weight:900}.answer.selected .letter{background:var(--acc);color:#fff}
+.finish-card{display:flex;align-items:center;gap:14px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--card);margin-top:20px}.finish-icon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(20,155,106,.1);color:var(--ok);font-weight:900}.finish-card div:nth-child(2){flex:1}.finish-card strong,.finish-card span{display:block}.finish-card span{font-size:11px;color:var(--mut);margin-top:3px}.finish-card .primary{padding:11px 15px}
+.result-hero{width:min(100% - 28px,920px);margin:35px auto 20px;padding:32px;border-radius:22px;background:linear-gradient(135deg,var(--card),var(--soft));border:1px solid var(--line);text-align:center}.result-hero h2{font-size:32px;margin:10px 0 3px}.result-hero p{margin:0;color:var(--mut)}.score{font-size:68px;font-weight:950;letter-spacing:-.06em;color:var(--acc);margin-top:15px}.score small{font-size:20px;color:var(--mut)}.score-meta{color:var(--mut);font-size:12px}.review-card{padding:18px;border:1px solid var(--line);border-radius:17px;background:var(--card);margin:12px 0}.review-top{display:flex;justify-content:space-between;font-size:11px;font-weight:850}.correct{color:var(--ok)}.wrong{color:var(--no)}.review-question{margin:12px 0;font-weight:700;line-height:1.5}.review-answers{font-size:12px;line-height:1.7;color:var(--mut)}.explanation{margin-top:12px;padding:12px;border-radius:11px;background:var(--soft);font-size:12px;line-height:1.55}.explanation span{display:block;color:var(--acc);font-size:9px;font-weight:900;letter-spacing:.1em;margin-bottom:5px}.secondary{display:block;margin:20px auto;background:transparent;color:var(--acc);border:1px solid var(--acc)}
+footer{text-align:center;color:var(--mut);font-size:10px;padding:25px 0 35px}
+@media(max-width:680px){.academic{grid-template-columns:1fr 1fr}.quiz-intro{grid-template-columns:1fr}.finish-card{align-items:flex-start;flex-wrap:wrap}.finish-card .primary{width:100%}.header-actions .live-badge{display:none}.quiz-header h2{font-size:17px}.question-card{padding:15px}}
+@media(max-width:430px){.cover h1{font-size:2.55rem}.academic{gap:12px}.academic strong{font-size:12px}.session-info{gap:7px}}
 </style>
 </head>
+<body data-mode="light">
+<section id="intro">
+  <div class="intro-shell">
+    <div class="intro-top">
+      <div class="brand-mark">Ψ</div>
+      <div class="theme">
+        <button data-t="light" class="active">Claro</button>
+        <button data-t="dark">Escuro</button>
+      </div>
+    </div>
 
-<body>
+    <div class="cover">
+      <div class="eyebrow"><span></span> Psicologia · Avaliação e estudo</div>
+      <h1>Processos<br><em>Psicológicos</em><br>Contemporâneos</h1>
+      <p class="lead">Simulado de revisão e aprendizagem sobre os processos psicológicos, suas relações e aplicações no cotidiano.</p>
 
-<div class="app">
+      <div class="cover-line"></div>
 
-  <!-- TELA INICIAL -->
-  <section id="loginScreen" class="screen active hero">
-    <div class="login-card">
-      <span class="eyebrow">Modo Mythos+ Ultra • Simulado Interativo</span>
-
-      <h1>Revisão de Prova<br>de Genética</h1>
-
-      <p class="subtitle">
-        <strong>Professora Michelle Diana</strong><br>
-        Genética Molecular • Síntese Proteica • Mutações • Genética Comportamental •
-        Epigenética • Gene × Ambiente
-      </p>
-
-      <div class="info-grid">
-        <div class="info">
-          <strong>15 questões</strong>
-          <span>Alternativas A–E</span>
-        </div>
-        <div class="info">
-          <strong>Uma por vez</strong>
-          <span>Sem revelar respostas</span>
-        </div>
-        <div class="info">
-          <strong>Resultado final</strong>
-          <span>Correção automática</span>
-        </div>
+      <div class="academic">
+        <div><small>DISCIPLINA</small><strong>Processos Psicológicos Contemporâneos</strong></div>
+        <div><small>PROFESSORA</small><strong>Danúbia</strong></div>
+        <div><small>PARTICIPANTE</small><strong>Thiago Aragão</strong></div>
+        <div><small>DATA</small><strong>08 de outubro de 2026</strong></div>
       </div>
 
-      <label for="studentName" style="display:block;text-align:left;font-weight:800;margin-bottom:7px">
-        Nome do aluno
-      </label>
+      <form id="fm" novalidate>
+        <label for="nm">Nome do aluno</label>
+        <div class="name-field"><input id="nm" autocomplete="name" placeholder="Digite seu nome completo" maxlength="80"></div>
+        <div class="er" id="er"></div>
+        <button class="primary start" type="submit">Iniciar avaliação <span>→</span></button>
+      </form>
 
-      <input
-        id="studentName"
-        class="input"
-        type="text"
-        autocomplete="name"
-        placeholder="Digite seu nome"
-        maxlength="80"
-      >
-
-      <button id="startBtn" class="btn btn-primary" style="width:100%;margin-top:13px">
-        Entrar e iniciar revisão
-      </button>
-
-      <p class="hint">
-        Suas respostas serão corrigidas somente quando você clicar em
-        <strong>Receber Gabarito</strong> na última questão.
-      </p>
+      <div class="session-info">
+        <span class="live-badge"><i></i> LIVE</span>
+        <span>20 questões</span><b>•</b><span>30 minutos</span><b>•</b><span>0,5 ponto cada</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<main id="app" style="display:none">
+  <header class="quiz-header">
+    <div class="quiz-header-inner">
+      <div>
+        <div class="small-title">PROCESSOS PSICOLÓGICOS CONTEMPORÂNEOS</div>
+        <h2>Simulado de revisão</h2>
+      </div>
+      <div class="header-actions">
+        <div class="live-badge"><i></i> LIVE</div>
+        <div class="timer-box" id="timerBox"><span>Tempo</span><strong id="timer">30:00</strong></div>
+      </div>
+    </div>
+    <div class="quiz-progress">
+      <div class="progress-row"><span id="progressText">0 de 20 respondidas</span><span id="answeredPill">0/20</span></div>
+      <div class="progress-track"><i id="progressFill"></i></div>
+    </div>
+  </header>
+
+  <section class="quiz-intro">
+    <div><span>FASE 2</span><h1>Leia, compreenda e responda.</h1></div>
+    <p>As questões foram organizadas para funcionar como instrumento de estudo: leia o contexto, identifique o conceito central e depois analise as alternativas.</p>
+    <div class="student-chip">Aluno: <b id="studentName"></b></div>
   </section>
 
-
-  <!-- TELA DA PROVA -->
-  <section id="quizScreen" class="screen">
-
-    <div class="topbar">
-      <div class="brand">MYTHOS+ ULTRA • GENÉTICA</div>
-      <div id="progressText" class="progress-text">Questão 1 de 15</div>
-    </div>
-
-    <div id="questionContainer"></div>
-
-    <div class="footer">
-      Revisão de Prova de Genética — Professora Michelle Diana
-    </div>
+  <section id="quizView">
+    <div id="prova"></div>
   </section>
-
-
-  <!-- RESULTADO -->
-  <section id="resultScreen" class="screen">
-
-    <div class="topbar">
-      <div class="brand">RESULTADO FINAL</div>
-      <div class="progress-text">Prova concluída</div>
-    </div>
-
-    <div class="result-card">
-
-      <div class="result-score">
-        <div id="studentResultName" class="small"></div>
-        <div id="scoreNumber" class="score-number">0%</div>
-        <div class="score-label">aproveitamento</div>
-      </div>
-
-      <div class="result-grid">
-        <div class="result-box">
-          <strong id="correctCount" class="correct">0</strong>
-          <span>Certas</span>
-        </div>
-
-        <div class="result-box">
-          <strong id="wrongCount" class="wrong">0</strong>
-          <span>Erradas</span>
-        </div>
-
-        <div class="result-box">
-          <strong id="unansweredCount" class="unanswered">0</strong>
-          <span>Não respondidas</span>
-        </div>
-      </div>
-
-      <div id="performanceMessage"
-           style="padding:15px;border-radius:14px;background:#eff6ff;color:#1e40af;font-weight:700">
-      </div>
-
-      <h2 style="margin-top:28px">Correção da prova</h2>
-
-      <p class="small">
-        Abaixo está a leitura individual de todas as questões. O sistema compara
-        exatamente a alternativa marcada com o gabarito programado.
-      </p>
-
-      <div id="resultList" class="result-list"></div>
-
-      <button class="btn btn-primary" style="width:100%;margin-top:25px" onclick="restartQuiz()">
-        Refazer a prova
-      </button>
-
-    </div>
-
-    <div class="footer">
-      Revisão de Prova de Genética — Professora Michelle Diana
-    </div>
-  </section>
-
-</div>
-
+  <section id="resultView" style="display:none"></section>
+  <footer>Processos Psicológicos Contemporâneos · Professora Danúbia · Material de revisão</footer>
+</main>
+</body>
 
 <script>
-
-const questions = [
-
-{
- type:"AFIRMAÇÃO CORRETA",
- text:"Sobre o fluxo da informação genética em células eucarióticas, assinale a alternativa CORRETA.",
- options:[
- "A) A tradução converte DNA diretamente em proteína.",
- "B) A replicação produz RNAm a partir do DNA.",
- "C) A transcrição utiliza DNA como molde para a síntese de RNA.",
- "D) O RNAt realiza a duplicação do genoma.",
- "E) A RNA polimerase realiza a tradução."
- ],
- answer:"C"
-},
-
-{
- type:"NEGATIVA",
- text:"Sobre a síntese proteica, todas as afirmações estão corretas, EXCETO:",
- options:[
- "A) O RNAm contém códons.",
- "B) O RNAt transporta aminoácidos.",
- "C) O ribossomo participa da formação das ligações peptídicas.",
- "D) A tradução ocorre nos ribossomos.",
- "E) O DNA nuclear precisa abandonar o núcleo para ser lido diretamente pelo ribossomo."
- ],
- answer:"E"
-},
-
-{
- type:"APLICAÇÃO",
- text:"Considere a fita molde de DNA: TAC GGA. Qual sequência de RNA será sintetizada?",
- options:[
- "A) TAC GGA",
- "B) AUG CCU",
- "C) ATG CCT",
- "D) UAC GGA",
- "E) AUG GGA"
- ],
- answer:"B"
-},
-
-{
- type:"CONCEITUAL",
- text:"A principal função do splicing no processamento do pré-RNAm é:",
- options:[
- "A) duplicar o DNA.",
- "B) converter uracila em timina.",
- "C) remover íntrons e unir éxons.",
- "D) transportar aminoácidos.",
- "E) provocar mutações no RNAm."
- ],
- answer:"C"
-},
-
-{
- type:"EXCLUSÃO",
- text:"São componentes diretamente relacionados à tradução, EXCETO:",
- options:[
- "A) RNAm.",
- "B) RNAt.",
- "C) Ribossomo.",
- "D) Aminoácidos.",
- "E) DNA polimerase."
- ],
- answer:"E"
-},
-
-{
- type:"CÓDIGO GENÉTICO",
- text:"Qual alternativa apresenta corretamente o códon de iniciação e os três códons de terminação?",
- options:[
- "A) AUG / UAA, UAG e UGA.",
- "B) UAA / AUG, UAG e UGA.",
- "C) ATG / TAA, TAG e TGA.",
- "D) AUG / AAA, CCC e GGG.",
- "E) UAC / AUG, UAA e UGA."
- ],
- answer:"A"
-},
-
-{
- type:"MUTAÇÕES",
- text:"Uma inserção de apenas um nucleotídeo dentro da região codificante de um gene tende a ser especialmente prejudicial porque pode:",
- options:[
- "A) duplicar automaticamente todo o cromossomo.",
- "B) transformar RNA em DNA.",
- "C) deslocar o quadro de leitura dos códons.",
- "D) eliminar todas as histonas celulares.",
- "E) impedir definitivamente qualquer replicação celular."
- ],
- answer:"C"
-},
-
-{
- type:"NEGATIVA / PEGADINHA",
- text:"Sobre mutações, assinale a alternativa INCORRETA.",
- options:[
- "A) Uma substituição pode ser silenciosa.",
- "B) Uma substituição pode gerar uma mutação missense.",
- "C) Uma substituição pode criar um stop prematuro.",
- "D) Toda mutação obrigatoriamente causa doença.",
- "E) Inserções e deleções podem alterar o quadro de leitura."
- ],
- answer:"D"
-},
-
-{
- type:"HEREDITARIEDADE",
- text:"Um indivíduo desenvolve uma mutação em uma célula da pele após exposição excessiva à radiação ultravioleta. Em condições usuais, essa alteração:",
- options:[
- "A) será obrigatoriamente transmitida aos filhos.",
- "B) transforma-se automaticamente em mutação germinativa.",
- "C) não será herdada pelos descendentes por estar em uma linhagem somática.",
- "D) será incorporada aos espermatozoides ou óvulos.",
- "E) modificará todos os genes do organismo."
- ],
- answer:"C"
-},
-
-{
- type:"GENÉTICA COMPORTAMENTAL",
- text:"A afirmação “existe um único gene responsável pela depressão” é inadequada principalmente porque:",
- options:[
- "A) transtornos mentais não possuem qualquer componente biológico.",
- "B) características comportamentais complexas geralmente apresentam arquitetura poligênica e multifatorial.",
- "C) somente fatores culturais influenciam o comportamento.",
- "D) genes existem apenas durante o desenvolvimento embrionário.",
- "E) neurônios não possuem DNA."
- ],
- answer:"B"
-},
-
-{
- type:"EPIGENÉTICA",
- text:"Qual alternativa descreve melhor a epigenética?",
- options:[
- "A) Alteração obrigatória da sequência de bases do DNA.",
- "B) Destruição permanente de genes pela experiência.",
- "C) Mecanismos regulatórios capazes de modificar padrões de atividade gênica sem exigir mudança na sequência do DNA.",
- "D) Processo exclusivamente psicológico sem participação molecular.",
- "E) Sinônimo de mutação cromossômica."
- ],
- answer:"C"
-},
-
-{
- type:"NEGATIVA / PEGADINHA",
- text:"Sobre epigenética e ambiente, assinale a alternativa INCORRETA.",
- options:[
- "A) Condições ambientais podem estar associadas a alterações na regulação gênica.",
- "B) Metilação do DNA é um mecanismo epigenético importante.",
- "C) Modificações de histonas podem alterar a acessibilidade da cromatina.",
- "D) Toda experiência traumática produz necessariamente a mesma alteração epigenética e essa alteração é obrigatoriamente herdada pelos netos.",
- "E) A relação entre ambiente, fisiologia e expressão gênica é complexa."
- ],
- answer:"D"
-},
-
-{
- type:"INTERPRETAÇÃO",
- text:"Dois gêmeos monozigóticos compartilham praticamente a mesma sequência genética, mas podem apresentar diferenças comportamentais e de saúde ao longo da vida. Qual conclusão é mais adequada?",
- options:[
- "A) O DNA não influencia nenhum fenótipo.",
- "B) O ambiente elimina completamente a genética.",
- "C) Genes e ambiente participam de sistemas complexos de desenvolvimento, podendo produzir diferenças fenotípicas.",
- "D) Gêmeos monozigóticos possuem genomas completamente diferentes.",
- "E) Toda diferença entre os gêmeos é necessariamente causada por mutações."
- ],
- answer:"C"
-},
-
-{
- type:"EXCLUSÃO / ANÁLISE CRÍTICA",
- text:"Um psicólogo recebe uma criança com impulsividade, dificuldades de atenção e exposição crônica à privação de sono e violência comunitária. À luz da genética comportamental e da neurociência, qual raciocínio é MAIS adequado?",
- options:[
- "A) Os sintomas comprovam automaticamente um transtorno genético.",
- "B) O contexto social deve ser ignorado porque não interfere na fisiologia.",
- "C) É necessário avaliar conjuntamente fatores biológicos, psicológicos, desenvolvimentais e ambientais antes de formular conclusões.",
- "D) A presença de adversidade exclui qualquer possibilidade de transtorno neurobiológico.",
- "E) Um exame genético isolado determina necessariamente o diagnóstico psicológico."
- ],
- answer:"C"
-},
-
-{
- type:"QUESTÃO INTEGRADORA",
- text:"Considere a sequência hipotética: Mutação no DNA → alteração do RNAm → alteração de um códon → alteração na sequência de aminoácidos → mudança estrutural da proteína. Qual alternativa interpreta CORRETAMENTE essa sequência?",
- options:[
- "A) Toda mutação obrigatoriamente modifica a proteína.",
- "B) Uma alteração genética pode modificar o produto proteico caso afete de maneira funcionalmente relevante a sequência codificante ou sua expressão.",
- "C) A tradução modifica diretamente a sequência do DNA.",
- "D) O RNAt provoca a mutação original.",
- "E) A proteína alterada retorna ao núcleo e reescreve obrigatoriamente o gene."
- ],
- answer:"B"
-}
-
+const Q=[
+{t:"M",c:"Em um show, a bateria chega a cerca de 100 dB. Os receptores da cóclea convertem vibrações em sinais neurais antes de qualquer reconhecimento musical. Curiosidade: após alguns minutos, o ruído constante de fundo parece menos intenso.",q:"A etapa inicial de captação e a redução gradual da resposta ao ruído constante correspondem, respectivamente, a:",o:["Sensação e adaptação sensorial","Percepção e limiar absoluto","Atenção e limiar diferencial","Sensação e fechamento","Percepção e pregnância"],a:0,e:"A sensação é a captação do estímulo; a adaptação sensorial é a redução da resposta a estímulo constante ou repetitivo."},
+{t:"M",c:"Ao ouvir os primeiros acordes, Ana exclama: 'é a música do casamento dos meus pais!'. Antes disso, as ondas sonoras apenas chegaram ao seu sistema auditivo.",q:"Qual alternativa distingue corretamente os dois momentos?",o:["Ambos são percepção, com intensidades distintas","A chegada do som é sensação; o reconhecimento é percepção, que envolve organização e significado","A chegada do som é percepção; o reconhecimento é sensação","A chegada do som é atenção; o reconhecimento é motivação","A chegada do som é emoção; o reconhecimento é sentimento"],a:1,e:"'O que chegou?' é sensação; 'o que isso significa?' é percepção. Reconhecer a música exige interpretação e memória."},
+{t:"M",c:"Numa festa barulhenta, Bruno acompanha a história de um amigo e ignora as demais conversas. Curiosidade: muitas pessoas notam seu próprio nome dito ao longe mesmo sem estarem atentas àquela conversa (efeito 'festa de coquetel').",q:"A capacidade de manter o foco no amigo apesar do ruído exemplifica principalmente:",o:["Atenção alternada, pois o foco muda continuamente","Adaptação sensorial, pois o ruído deixa de ser captado","Sensação pura, sem qualquer seleção","Atenção seletiva, que prioriza estímulos relevantes entre concorrentes","Fechamento, pois a conversa é completada mentalmente"],a:3,e:"A atenção seletiva escolhe estímulos relevantes. Como os recursos são limitados, nem todos os estímulos recebem o mesmo processamento."},
+{t:"M",c:"Camila estuda 20 minutos, olha o celular, responde uma mensagem, volta ao resumo e repete o ciclo. Pesquisas sobre multitarefa apontam custos de mudança de foco, sobretudo em atividades exigentes.",q:"O padrão descrito e o custo associado são, respectivamente:",o:["Atenção sustentada; ausência de custo","Atenção alternada; custos de mudança de foco","Atenção dividida; ausência de competição entre estímulos","Atenção seletiva; ampliação ilimitada de recursos","Fechamento; perda de pregnância"],a:1,e:"Mudar o foco entre tarefas (estudar → mensagem → estudar) é atenção alternada, e a troca tem custo cognitivo."},
+{t:"M",c:"Logotipos conhecidos frequentemente têm contornos interrompidos, e ainda assim os reconhecemos. O design explora tendências de organização perceptiva descritas pela Gestalt: a percepção não é cópia passiva do mundo.",q:"Um logotipo com círculo aberto é visto como círculo completo. O princípio envolvido é:",o:["Proximidade: elementos próximos formam grupos","Similaridade: elementos semelhantes são agrupados","Continuidade: preferência por trajetórias contínuas","Fechamento: tendência a completar configurações incompletas","Figura-fundo: separação entre elemento focal e contexto"],a:3,e:"Fechamento é a tendência a completar formas incompletas, evidenciando organização ativa da percepção."},
+{t:"M",c:"No menu de um aplicativo, os ícones aparecem em dois blocos separados por um espaço maior; dentro de cada bloco, os ícones compartilham a mesma cor.",q:"A percepção de dois blocos e a de subgrupos por cor decorrem, respectivamente, de:",o:["Similaridade e proximidade","Proximidade e similaridade","Fechamento e continuidade","Figura-fundo e pregnância","Continuidade e fechamento"],a:1,e:"A distância favorece o agrupamento por proximidade; a cor compartilhada favorece o agrupamento por similaridade."},
+{t:"M",c:"Ao ler uma palavra parcialmente apagada, o leitor a completa sem esforço, pois conhece o idioma e o contexto da frase. Quem não domina a língua teria mais dificuldade diante do mesmo estímulo.",q:"Esse exemplo evidencia que:",o:["A percepção depende exclusivamente do estímulo (bottom-up)","A pessoa inventa a realidade ao interpretar","Conhecimentos prévios e contexto participam da interpretação (top-down), sem eliminar a informação sensorial","A sensação é dispensável para perceber","A percepção é uma cópia passiva do mundo"],a:2,e:"Top-down não significa inventar a realidade: significa que expectativas, contexto e conhecimento participam da construção do significado."},
+{t:"M",c:"Rafael vê um cachorro solto vindo em sua direção. Avalia o risco, sente o coração disparar, pensa 'estou com medo' e atravessa a rua.",q:"Associe, na ordem, os quatro eventos aos componentes da emoção:",o:["Fisiológico, cognitivo, comportamental, subjetivo","Subjetivo, comportamental, cognitivo, fisiológico","Comportamental, subjetivo, fisiológico, cognitivo","Cognitivo, fisiológico, subjetivo, comportamental","Cognitivo, subjetivo, fisiológico, comportamental"],a:3,e:"Avaliação = cognitivo; coração acelerado = fisiológico; 'estou com medo' = subjetivo; atravessar a rua = comportamental. Isso ilustra a emoção multidimensional."},
+{t:"M",c:"Após uma crítica, Lúcia sente o rosto esquentar de imediato. Horas depois, reflete e conclui que se sentiu desrespeitada e insegura. Analogia da aula: a emoção é a onda que se eleva rápido; o sentimento é a experiência consciente que continua sendo elaborada.",q:"Segundo a distinção trabalhada em aula:",o:["Emoção e sentimento são sinônimos exatos","A emoção é uma resposta afetiva multidimensional, mais imediata; o sentimento é a experiência subjetiva consciente com atribuição de significado","A emoção é sempre consciente e o sentimento é apenas fisiológico","O sentimento antecede a emoção e a dispensa","A emoção restringe-se ao comportamento observável"],a:1,e:"Macete: emoção = mobilização; sentimento = experiência consciente + significado. Teorias podem variar, mas na prova segue-se o modelo da professora."},
+{t:"M",c:"Pedro estuda Psicologia porque se encanta com o tema; João estuda apenas pela recompensa prometida. Ciclo da motivação: necessidade → objetivo → comportamento → consequência → novo ciclo.",q:"Classifique a motivação predominante de cada um e o papel da consequência:",o:["Ambos extrínsecos; a consequência é irrelevante","Pedro extrínseco e João intrínseco","Pedro intrínseco e João extrínseco; as consequências podem realimentar a motivação futura","Ambos intrínsecos; não há ciclo","Pedro sensorial e João perceptivo"],a:2,e:"Interesse, prazer ou valor pessoal = intrínseca; recompensa, reconhecimento ou evitar punição = extrínseca. As consequências alimentam o próximo ciclo."},
+{t:"E",c:"Ao descrever uma sala, Beatriz cita luz, aroma de café, texturas, o equilíbrio ao andar e os batimentos após subir a escada. A professora classificou tais registros em modalidades sensoriais.",q:"Todas as alternativas são modalidades sensoriais, EXCETO:",o:["Visão","Sistema vestibular","Interocepção","Viés de confirmação","Propriocepção"],a:3,e:"Viés de confirmação é fenômeno da percepção/cognição, em que crenças prévias influenciam o que notamos e valorizamos; não é modalidade sensorial."},
+{t:"E",c:"Cartazes e interfaces exploram a tendência de organizarmos estímulos em padrões. Nem todo conceito de psicologia da percepção, porém, pertence à abordagem gestáltica; alguns pertencem à sensação.",q:"Assinale o que NÃO é princípio da Gestalt:",o:["Pregnância (boa forma)","Continuidade","Figura-fundo","Similaridade","Limiar diferencial"],a:4,e:"Limiar diferencial (diferença mínima detectável entre estímulos) é conceito sensorial. Princípios gestálticos: proximidade, similaridade, fechamento, continuidade, figura-fundo e pregnância."},
+{t:"E",c:"Uma estudante afirma: 'eu queria muito me concentrar, mas as notificações atrapalharam'. A psicologia da atenção explica o episódio sem recorrer a falta de força de vontade apenas.",q:"Sobre atenção, assinale a alternativa INCORRETA:",o:["Pode ser seletiva, sustentada, dividida ou alternada","Os recursos de processamento são limitados","O desejo de prestar atenção cria recursos atencionais ilimitados","Notificações podem competir com a tarefa atual","A atenção sustentada mantém o foco ao longo do tempo"],a:2,e:"Querer prestar atenção não amplia recursos: estímulos competem pelo foco. Atenção não é botão liga/desliga; depende de objetivos, estímulo e contexto."},
+{t:"E",c:"Manchetes sensacionalistas afirmam que 'redes sociais causam o mesmo problema em todo mundo'. A abordagem científica pede cautela com frases absolutas e atenção às variáveis envolvidas.",q:"Sobre tecnologia e processos psicológicos, assinale a INCORRETA:",o:["O fato de um conteúdo aparecer repetidamente comprova que ele representa toda a realidade","A curadoria algorítmica pode influenciar quais estímulos entram na experiência do usuário","A comparação social pode participar de julgamentos sobre si e sobre a própria vida","Os efeitos dependem de pessoa, contexto, conteúdo e padrão de uso","O excesso informacional aumenta a necessidade de seleção e priorização"],a:0,e:"A experiência digital é uma seleção de informações, não a realidade inteira. Os demais itens condizem com os conceitos de percepção contemporânea."},
+{t:"V",c:"Texto-base: em ambientes digitais, notificações, vídeos e comentários disputam o foco do usuário, e emoções podem redirecionar o que se nota.",q:"Julgue as afirmativas:<br>I. Uma notificação durante uma tarefa é estímulo concorrente pela atenção.<br>II. Atenção sustentada consiste em alternar o foco entre tarefas.<br>III. Emoção e atenção podem interagir dinamicamente.<br>Está(ão) correta(s):",o:["Apenas I","I e III","II e III","Apenas II","I, II e III"],a:1,e:"II é falsa: manter o foco ao longo do tempo é atenção sustentada; alternar entre tarefas é atenção alternada."},
+{t:"V",c:"Duas pessoas olham a mesma figura ambígua: uma vê primeiro uma forma, a outra, outra organização. Curiosidade: figuras ambíguas são clássicas para estudar a organização perceptiva.",q:"Julgue as afirmativas:<br>I. A experiência perceptiva pode variar conforme figura-fundo, contexto e expectativas.<br>II. Bottom-up parte das características do estímulo.<br>III. Top-down significa que a percepção independe do estímulo.<br>Está(ão) correta(s):",o:["Apenas III","II e III","I e II","I e III","Apenas II"],a:2,e:"III é falsa: no processamento top-down, conhecimento e expectativas participam da interpretação, mas o estímulo continua sendo fonte de informação."},
+{t:"V",c:"Um técnico de áudio calibra um equipamento: precisa saber o menor volume audível e a menor mudança de volume perceptível. Depois de horas, o zumbido do ambiente 'some' para ele.",q:"Julgue as afirmativas:<br>I. Limiar absoluto é a menor intensidade detectável de um estímulo.<br>II. Limiar diferencial é a diferença mínima detectável entre estímulos.<br>III. Adaptação sensorial é o aumento da resposta a um estímulo constante.<br>Está(ão) correta(s):",o:["I e II","Apenas I","Apenas III","II e III","I, II e III"],a:0,e:"III é falsa: a adaptação sensorial é a redução da resposta a estímulo constante ou repetitivo."},
+{t:"V",c:"O mapa didático dos processos (estímulo → sensação → atenção → percepção → emoção → sentimento → motivação → comportamento → consequência) é ferramenta de estudo, e não um roteiro obrigatório da mente.",q:"Julgue as afirmativas:<br>I. A sequência é didática, não uma cadeia rígida.<br>II. A consequência pode alterar a motivação futura.<br>III. A percepção é cópia passiva do mundo.<br>Está(ão) correta(s):",o:["I, II e III","I e III","II e III","I e II","Apenas III"],a:3,e:"III é falsa: a percepção é construção ativa de significado. Na vida real os processos interagem em rede (efeito dominó)."},
+{t:"M",c:"Caso integrador: João estuda. O celular vibra. Ele sente a vibração, direciona o olhar ao aparelho, lê uma mensagem e a interpreta como crítica. Fica irritado, pensa que não é respeitado, decide responder e interrompe o estudo.",q:"Qual alternativa identifica corretamente a sequência dos processos?",o:["Percepção → sensação → atenção → emoção → motivação → comportamento","Atenção → sensação → emoção → percepção → comportamento","Emoção → percepção → sensação → motivação → atenção","Motivação → atenção → sensação → comportamento → percepção","Sensação (vibração) → atenção (olhar) → percepção (crítica) → emoção (irritação) → sentimento (desrespeito) → motivação → comportamento (responder)"],a:4,e:"A leitura segue o caso do material: a consequência é a redução do tempo de estudo e a continuidade da interação, que realimenta o ciclo."},
+{t:"M",c:"Questão discursiva: 'Como os processos psicológicos básicos participam da relação com as redes sociais?'. Um aluno copia trechos da apostila; outro aplica a estrutura definição → explicação → exemplo → consequência.",q:"Qual resposta demonstra compreensão conceitual adequada e cautela científica?",o:["As redes determinam automaticamente os pensamentos de todos os usuários","Imagens e sons são captados (sensação); a atenção seleciona parte deles; a percepção interpreta conforme contexto e expectativas; podem surgir emoção e sentimento, motivação para comentar ou compartilhar e comportamento que gera novos estímulos","Apenas lista os termos sem relacioná-los","Reproduz literalmente um parágrafo da apostila","Reduz tudo à atenção, ignorando percepção e emoção"],a:1,e:"A melhor resposta articula os processos em ciclo, com exemplo e consequência, sem determinismo. Defina → diferencie → exemplifique → explique a consequência."}
 ];
+const L="ABCDE",TN={M:"Múltipla escolha",V:"Verdadeiro ou falso",E:"Exclusão"};
+const R={};
+const $=id=>document.getElementById(id);
+let nome="",fin=false,timer=null,secondsLeft=1800;
 
-let current = 0;
-let studentName = "";
-let answers = new Array(questions.length).fill(null);
+function esc(t){return String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function fmt(n){return n.toFixed(1).replace(".",",");}
 
-const loginScreen = document.getElementById("loginScreen");
-const quizScreen = document.getElementById("quizScreen");
-const resultScreen = document.getElementById("resultScreen");
-const questionContainer = document.getElementById("questionContainer");
-const progressText = document.getElementById("progressText");
+function renderProva(){
+  $("prova").innerHTML=Q.map((x,i)=>`
+    <article class="question-card" id="q${i}">
+      <div class="q-head">
+        <div class="q-index">${String(i+1).padStart(2,"0")}</div>
+        <div>
+          <div class="q-meta">Questão ${i+1} de 20 · ${TN[x.t]} · 0,5 ponto</div>
+          <div class="q-topic">${x.t==="E"?"Análise por exclusão":x.t==="V"?"Julgamento conceitual":"Aplicação e interpretação"}</div>
+        </div>
+      </div>
+      ${x.c?`<div class="context"><span>CONTEXTO</span><div>${x.c}</div></div>`:""}
+      <div class="statement">
+        <div class="label">ENUNCIADO</div>
+        <div class="statement-text">${x.q}</div>
+      </div>
+      <div class="study-note">
+        <span>✦ PISTA DE ESTUDO</span>
+        <div>Antes de marcar, identifique o conceito central do enunciado e compare-o com cada alternativa. Procure a relação entre definição, contexto e consequência.</div>
+      </div>
+      <div class="answers">
+        <div class="label answer-label">ALTERNATIVAS</div>
+        ${x.o.map((o,j)=>`<button class="answer ${R[i]===j?"selected":""}" data-i="${i}" data-j="${j}">
+          <span class="letter">${L[j]}</span><span>${o}</span>
+        </button>`).join("")}
+      </div>
+    </article>
+  `).join("") + `
+    <section class="finish-card">
+      <div class="finish-icon">✓</div>
+      <div><strong>Você chegou ao final.</strong><span>Revise suas escolhas e finalize para visualizar o gabarito comentado.</span></div>
+      <button class="primary" id="finish">Finalizar simulado</button>
+    </section>`;
+  updateProgress();
+}
 
-document.getElementById("startBtn").addEventListener("click", startQuiz);
+function updateProgress(){
+  const n=Object.keys(R).length;
+  $("progressText").textContent=`${n} de 20 respondidas`;
+  $("progressFill").style.width=(n*5)+"%";
+  $("answeredPill").textContent=`${n}/20`;
+}
 
-document.getElementById("studentName").addEventListener("keydown", e => {
-  if(e.key === "Enter") startQuiz();
+function startTimer(){
+  clearInterval(timer);
+  timer=setInterval(()=>{
+    secondsLeft--;
+    const min=Math.floor(secondsLeft/60), sec=secondsLeft%60;
+    $("timer").textContent=`${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+    if(secondsLeft<=300) $("timerBox").classList.add("urgent");
+    if(secondsLeft<=0){ clearInterval(timer); finish(); }
+  },1000);
+}
+
+function transitionToQuiz(){
+  const v=$("nm").value.trim();
+  if(v.length<3){ $("er").textContent="Digite seu nome para iniciar."; $("nm").focus(); return; }
+  nome=v;
+  $("intro").classList.add("leave");
+  setTimeout(()=>{
+    $("intro").style.display="none";
+    $("app").style.display="block";
+    $("studentName").textContent=nome;
+    renderProva();
+    startTimer();
+    window.scrollTo({top:0,behavior:"instant"});
+  },620);
+}
+
+function finish(){
+  if(fin) return;
+  const miss=20-Object.keys(R).length;
+  if(miss>0 && !confirm(`Ainda faltam ${miss} questões. Deseja finalizar mesmo assim?`)) return;
+  fin=true; clearInterval(timer);
+  let s=0; Q.forEach((x,i)=>{if(R[i]===x.a)s++;});
+  const nota=s*.5;
+  $("quizView").style.display="none";
+  $("resultView").style.display="block";
+  $("resultView").innerHTML=`
+    <section class="result-hero">
+      <div class="live-badge"><i></i> RESULTADO</div>
+      <h2>Simulado concluído</h2>
+      <p>${esc(nome)}</p>
+      <div class="score">${fmt(nota)}<small>/10,0</small></div>
+      <div class="score-meta"><b>${s}</b> acertos · <b>${20-s}</b> erros ou em branco</div>
+    </section>
+    <div class="result-list">
+      ${Q.map((x,i)=>{
+        const c=R[i]===x.a;
+        return `<article class="review-card">
+          <div class="review-top"><span>Questão ${i+1}</span><b class="${c?"correct":"wrong"}">${c?"CORRETA · +0,5":"INCORRETA · 0,0"}</b></div>
+          <div class="review-question">${x.q}</div>
+          <div class="review-answers"><b>Sua resposta:</b> ${R[i]===undefined?"Em branco":L[R[i]]+") "+x.o[R[i]]}<br><b>Gabarito:</b> ${L[x.a]}) ${x.o[x.a]}</div>
+          <div class="explanation"><span>EXPLICAÇÃO</span>${x.e}</div>
+        </article>`;
+      }).join("")}
+    </div>
+    <button class="secondary" id="restart">↻ Refazer simulado</button>`;
+  $("resultView").scrollIntoView({behavior:"smooth"});
+}
+
+$("fm").addEventListener("submit",e=>{e.preventDefault();transitionToQuiz();});
+$("prova").addEventListener("click",e=>{
+  const b=e.target.closest(".answer"); if(!b)return;
+  const i=+b.dataset.i,j=+b.dataset.j; R[i]=j;
+  b.parentNode.querySelectorAll(".answer").forEach(x=>x.classList.remove("selected"));
+  b.classList.add("selected"); updateProgress();
 });
-
-function startQuiz(){
-  const name = document.getElementById("studentName").value.trim();
-
-  if(!name){
-    alert("Digite seu nome para iniciar a revisão.");
-    document.getElementById("studentName").focus();
-    return;
-  }
-
-  studentName = name;
-  current = 0;
-  answers = new Array(questions.length).fill(null);
-
-  loginScreen.classList.remove("active");
-  resultScreen.classList.remove("active");
-  quizScreen.classList.add("active");
-
-  renderQuestion();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function renderQuestion(){
-
-  const q = questions[current];
-  progressText.textContent = `Questão ${current + 1} de ${questions.length}`;
-
-  const selected = answers[current];
-
-  let optionsHTML = "";
-
-  q.options.forEach((option,index)=>{
-
-    const letter = String.fromCharCode(65 + index);
-    const checked = selected === letter ? "checked" : "";
-
-    optionsHTML += `
-      <div class="option">
-        <input
-          type="radio"
-          name="answer"
-          id="option-${letter}"
-          value="${letter}"
-          ${checked}
-          onchange="selectAnswer('${letter}')"
-        >
-        <label for="option-${letter}">
-          <span class="option-letter">${letter}</span>
-          ${escapeHTML(option.substring(3))}
-        </label>
-      </div>
-    `;
-  });
-
-  const isLast = current === questions.length - 1;
-
-  questionContainer.innerHTML = `
-    <div class="question-card">
-
-      <div class="question-head">
-
-        <div class="question-type">${q.type}</div>
-
-        <div class="question-number">
-          QUESTÃO ${current + 1} / ${questions.length}
-        </div>
-
-        <p class="question-text">
-          ${q.text}
-        </p>
-
-      </div>
-
-      <div class="options">
-        ${optionsHTML}
-      </div>
-
-      <div class="navigation">
-
-        <button
-          class="btn btn-secondary"
-          onclick="previousQuestion()"
-          ${current === 0 ? "disabled" : ""}
-        >
-          ← Anterior
-        </button>
-
-        ${
-          isLast
-          ?
-          `<button
-             class="btn btn-primary"
-             onclick="finishQuiz()"
-           >
-             Receber Gabarito ✓
-           </button>`
-          :
-          `<button
-             class="btn btn-primary"
-             onclick="nextQuestion()"
-           >
-             Próxima →
-           </button>`
-        }
-
-      </div>
-
-    </div>
-
-    <div class="hint">
-      ${isLast
-        ? "Você chegou à última questão. Ao clicar em “Receber Gabarito”, todas as respostas serão corrigidas."
-        : "Selecione uma alternativa e avance para a próxima questão. A resposta correta não será revelada durante a prova."
-      }
-    </div>
-  `;
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function selectAnswer(letter){
-  answers[current] = letter;
-}
-
-function nextQuestion(){
-
-  if(!answers[current]){
-    alert("Selecione uma alternativa antes de avançar.");
-    return;
-  }
-
-  current++;
-  renderQuestion();
-}
-
-function previousQuestion(){
-  if(current > 0){
-    current--;
-    renderQuestion();
-  }
-}
-
-function finishQuiz(){
-
-  if(!answers[current]){
-    alert("Selecione uma alternativa antes de receber o gabarito.");
-    return;
-  }
-
-  const unanswered = answers.filter(a => a === null).length;
-
-  if(unanswered > 0){
-    const go = confirm(
-      `Ainda existem ${unanswered} questão(ões) sem resposta. Deseja finalizar mesmo assim?`
-    );
-
-    if(!go) return;
-  }
-
-  calculateResult();
-}
-
-function calculateResult(){
-
-  let correct = 0;
-  let wrong = 0;
-
-  questions.forEach((q,index)=>{
-    if(answers[index] === q.answer){
-      correct++;
-    }else if(answers[index] !== null){
-      wrong++;
-    }
-  });
-
-  const unanswered = answers.filter(a => a === null).length;
-  const percentage = Math.round((correct / questions.length) * 100);
-
-  document.getElementById("studentResultName").textContent =
-    `Aluno(a): ${studentName}`;
-
-  document.getElementById("scoreNumber").textContent =
-    `${percentage}%`;
-
-  document.getElementById("correctCount").textContent = correct;
-  document.getElementById("wrongCount").textContent = wrong;
-  document.getElementById("unansweredCount").textContent = unanswered;
-
-  let message = "";
-
-  if(percentage >= 90){
-    message = "Excelente desempenho. Você demonstrou domínio muito consistente do conteúdo.";
-  }else if(percentage >= 75){
-    message = "Muito bom desempenho. O conteúdo principal está bem consolidado; revise os pontos específicos das questões erradas.";
-  }else if(percentage >= 60){
-    message = "Bom ponto de partida. Faça uma segunda revisão concentrada nos conceitos que geraram erro.";
-  }else{
-    message = "É recomendável revisar o conteúdo-base e refazer o simulado após a revisão.";
-  }
-
-  document.getElementById("performanceMessage").textContent = message;
-
-  const list = document.getElementById("resultList");
-
-  list.innerHTML = questions.map((q,index)=>{
-
-    const selected = answers[index];
-    const isCorrect = selected === q.answer;
-
-    let statusClass = isCorrect ? "ok" : "bad";
-
-    let selectedText =
-      selected
-      ? q.options[letterIndex(selected)]
-      : "Não respondida";
-
-    return `
-      <div class="result-item ${statusClass}">
-        <strong>Questão ${index+1} — ${isCorrect ? "✓ CERTA" : "✕ ERRADA"}</strong>
-
-        <div class="small" style="margin-top:5px">
-          Sua resposta:
-          <strong>${selectedText}</strong>
-        </div>
-
-        <div class="small">
-          Gabarito:
-          <strong>${q.answer}</strong>
-        </div>
-      </div>
-    `;
-
-  }).join("");
-
-  quizScreen.classList.remove("active");
-  resultScreen.classList.add("active");
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function letterIndex(letter){
-  return letter.charCodeAt(0) - 65;
-}
-
-function restartQuiz(){
-  resultScreen.classList.remove("active");
-  quizScreen.classList.remove("active");
-  loginScreen.classList.add("active");
-
-  document.getElementById("studentName").value = studentName;
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function escapeHTML(text){
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
-
+$("prova").addEventListener("click",e=>{if(e.target.id==="finish")finish();});
+$("resultView").addEventListener("click",e=>{
+  if(e.target.id==="restart") location.reload();
+});
+document.querySelectorAll(".theme button").forEach(b=>b.onclick=()=>{
+  document.body.dataset.mode=b.dataset.t;
+  document.querySelectorAll(".theme button").forEach(x=>x.classList.toggle("active",x.dataset.t===b.dataset.t));
+});
+$("nm").addEventListener("input",()=>$("er").textContent="");
 </script>
-
-</body>
 </html>
